@@ -10,7 +10,7 @@ function App() {
   let [tags, setTags] = useState([]);
   let [number, setNumber] = useState(0);
 
-  let url = "localhost:9000/testAPI";
+  let url = "http://localhost:9000/testAPI";
 
   const handleChange = (e) => {
     let data = e.target.value;
@@ -50,8 +50,9 @@ function App() {
     };
 
     axios
-      .post(url, value).then((response) => console.log("hello ekta")).catch((error) => console.log(error));
-  
+      .post(url, value)
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
   };
 
   return (
