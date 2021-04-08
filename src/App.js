@@ -9,6 +9,7 @@ function App() {
   let [maxRating, setMaxRating] = useState(0);
   let [tags, setTags] = useState([]);
   let [number, setNumber] = useState(0);
+  let [question, setQuestion] = useState([]);
 
   let url = "http://localhost:9000/testAPI";
 
@@ -51,8 +52,17 @@ function App() {
 
     axios
       .post(url, value)
-      .then((response) => console.log(response))
+      .then((response) => {
+        console.log(response.data.result);
+        setQuestion(response.data.result);
+      })
       .catch((error) => console.log(error));
+  };
+
+  const handleClick = () => {
+    question.forEach((q) => {
+      console.log(q.link);
+    });
   };
 
   return (
@@ -97,11 +107,18 @@ function App() {
         </div>
         <input type="submit" name="name" />
       </form>
+      <button name="getQuestion" onClick={handleClick}>
+        {" "}
+        Click{" "}
+      </button>
       <text> {userid} </text>
       <text> {number} </text>
       <text> {minRating} </text>
       <text> {maxRating} </text>
       <text> {tags} </text>
+      {question.map((q) => {
+        return <text> {q} </text>;
+      })}
     </div>
   );
 }
